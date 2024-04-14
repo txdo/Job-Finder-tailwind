@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+section {
+  @apply py-16;
+}
+
+.my-container {
+  @apply px-4 md:px-12 lg:px-36;
+}
+
+.selected {
+  @apply bg-teal-100;
+}
+
+.box {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.box main {
+  flex-grow: 1;
+}
+
+@keyframes opening {
+  to {
+    transform: translateY(80vh);
+  }
+}
+
+@keyframes closing {
+  from {
+    transform: translateY(80vh);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+header {
+  svg {
+    display: none;
+    cursor: pointer;
+  }
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: -80vh;
+    right: 0;
+  }
+  .open {
+    display: flex !important;
+    align-items: center;
+    width: 80vw;
+    animation: opening 0.5s ease-in-out forwards;
+    z-index: 3;
+  }
+
+  .is-closing {
+    animation: closing 0.5s ease-in-out forwards;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  header div nav,
+  header nav:not(.mobile-nav) {
+    display: none;
+  }
+  svg {
+    display: block !important;
+  }
+}
+
+.nav-link:not(.active) {
+  @apply hover:bg-teal-50 text-slate-700 py-2 px-4 rounded-md duration-300;
+}
+
+.active {
+  @apply text-teal-500 py-2 px-4 font-bold;
+}
