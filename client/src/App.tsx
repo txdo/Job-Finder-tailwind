@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import AllJobs from "./components/AllJobs";
+import CompanyInfo from "./components/CompanyInfo";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="/all-jobs" element={<AllJobs />} />
+          <Route path="/companies/:id" element={<CompanyInfo />} />
         </Routes>
       </main>
     </div>
