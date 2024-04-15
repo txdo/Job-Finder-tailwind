@@ -76,7 +76,7 @@ header {
   header nav:not(.mobile-nav) {
     display: none;
   }
-  svg {
+  header svg {
     display: block !important;
   }
 }
