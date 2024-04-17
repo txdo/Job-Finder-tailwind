@@ -1,6 +1,5 @@
 import CreateProfileCard from "./CreateProfileCard";
 import ExploreJobs from "./ExploreJobs";
-import Footer from "./Footer";
 import Hero from "./Hero";
 import LatestJobs from "./LatestJobs";
 
@@ -11,7 +10,6 @@ const Home = (): JSX.Element => {
       <ExploreJobs />
       <LatestJobs />
       <CreateProfileCard />
-      <Footer />
     </>
   );
 };
