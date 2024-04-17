@@ -4,10 +4,11 @@ import Home from "./components/Home";
 import AllJobs from "./components/AllJobs";
 import CompanyInfo from "./components/CompanyInfo";
 import WithHeader from "./components/WithHeader";
-import WithFooter from "./components/WithFooter";
 import Login from "./components/Login";
 import useApp from "./hooks/useApp";
 import Register from "./components/Register";
+import Candidates from "./components/Candidates";
+import WithHeaderAndFooter from "./components/WithHeaderAndFooter";
 
 function App() {
   useApp();
@@ -18,11 +19,12 @@ function App() {
         <Route element={<WithHeader />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route element={<WithFooter />}>
-            <Route index element={<Home />} />
-            <Route path="/all-jobs" element={<AllJobs />} />
-            <Route path="/companies/:id" element={<CompanyInfo />} />
-          </Route>
+        </Route>
+        <Route element={<WithHeaderAndFooter />}>
+          <Route index element={<Home />} />
+          <Route path="/all-jobs" element={<AllJobs />} />
+          <Route path="/companies/:id" element={<CompanyInfo />} />
+          <Route path="/people" element={<Candidates />} />
         </Route>
       </Routes>
     </div>
