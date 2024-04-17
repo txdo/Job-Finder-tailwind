@@ -3,16 +3,21 @@ import "./App.css";
 import Home from "./components/Home";
 import AllJobs from "./components/AllJobs";
 import CompanyInfo from "./components/CompanyInfo";
-import Layout from "./components/Layout";
+import WithHeader from "./components/WithHeader";
+import WithFooter from "./components/WithFooter";
+import Login from "./components/Login";
 
 function App() {
   return (
     <div className="box">
       <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/all-jobs" element={<AllJobs />} />
-          <Route path="/companies/:id" element={<CompanyInfo />} />
+        <Route element={<WithHeader />}>
+          <Route path="/login" element={<Login />} />
+          <Route element={<WithFooter />}>
+            <Route index element={<Home />} />
+            <Route path="/all-jobs" element={<AllJobs />} />
+            <Route path="/companies/:id" element={<CompanyInfo />} />
+          </Route>
         </Route>
       </Routes>
     </div>

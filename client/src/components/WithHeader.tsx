@@ -1,17 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import Footer from "./Footer";
 
-const Layout = (): JSX.Element => {
+const WithHeader = (): JSX.Element => {
   return (
     <>
       <Header />
       <main>
         <Outlet />
       </main>
-      <Footer />
     </>
   );
 };
 
-export default Layout;
+export default WithHeader;
