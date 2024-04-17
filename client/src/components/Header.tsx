@@ -1,12 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import useHeader from "../hooks/useHeader";
+import useAuthStore from "../authStore";
 
 const Header = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
-  const { toggleMenu } = useHeader();
+  const { toggleMenu, logout } = useHeader();
+
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   return (
     <header className="flex justify-between px-4 py-4 items-center">
@@ -31,12 +34,28 @@ const Header = (): JSX.Element => {
         </nav>
       </div>
       <nav>
-        <NavLink to="/login" className="nav-link">
-          Login
-        </NavLink>
-        <NavLink to="/register" className="nav-link">
-          Register
-        </NavLink>
+        {isLoggedIn ? (
+          <>
+            <NavLink to="/messages" className="nav-link">
+              Messages
+            </NavLink>
+            <NavLink to="/profile" className="nav-link">
+              Profile
+            </NavLink>
+            <button onClick={logout} className="nav-link">
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <NavLink to="/login" className="nav-link">
+              Login
+            </NavLink>
+            <NavLink to="/register" className="nav-link">
+              Register
+            </NavLink>
+          </>
+        )}
       </nav>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -79,12 +98,28 @@ const Header = (): JSX.Element => {
         <NavLink to="/career-advices" className="text-2xl text-slate-700">
           Career Advices
         </NavLink>
-        <NavLink to="/login" className="text-2xl text-slate-700">
-          Login
-        </NavLink>
-        <NavLink to="/register" className="text-2xl text-slate-700">
-          Register
-        </NavLink>
+        {isLoggedIn ? (
+          <>
+            <NavLink to="/messages" className="text-2xl text-slate-700">
+              Messages
+            </NavLink>
+            <NavLink to="/profile" className="text-2xl text-slate-700">
+              Profile
+            </NavLink>
+            <button onClick={logout} className="text-2xl text-slate-700">
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <NavLink to="/login" className="text-2xl text-slate-700">
+              Login
+            </NavLink>
+            <NavLink to="/register" className="text-2xl text-slate-700">
+              Register
+            </NavLink>
+          </>
+        )}
       </nav>
     </header>
   );

@@ -1,13 +1,12 @@
 import { useState } from "react";
 import illustration from "../assets/auth.svg";
-import useLogin from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 
-const Login = (): JSX.Element => {
+const Register = (): JSX.Element => {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  const { login } = useLogin();
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   return (
     <section className="h-full">
@@ -17,11 +16,18 @@ const Login = (): JSX.Element => {
           alt="Auth Illustration"
           className="hidden md:inline-block max-h-[70vh] max-w-[50vw] w-auto"
         />
-        <div className="border rounded shadow flex flex-col justify-center gap-4 p-8 h-80">
+        <div className="border rounded shadow flex flex-col justify-center gap-4 p-8">
           <h1 className="font-bold text-3xl text-slate-700">
             Let's get started 🚀
           </h1>
-          <p className="text-slate-500">Log in into your account</p>
+          <p className="text-slate-500">Create your account</p>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Name"
+            className="bg-slate-100 p-2 rounded border-2 border-teal-500 transition-all duration-300 ring-0 focus:ring-2 focus:ring-teal-200 focus:outline-none"
+          />
           <input
             type="text"
             value={username}
@@ -36,16 +42,20 @@ const Login = (): JSX.Element => {
             placeholder="Password"
             className="bg-slate-100 p-2 rounded border-2 border-teal-500 transition-all duration-300 ring-0 focus:ring-2 focus:ring-teal-200 focus:outline-none"
           />
-          <button
-            onClick={() => login(username, password)}
-            className="self-center bg-teal-500 text-white px-4 py-2 hover:bg-teal-600 duration-300 rounded"
-          >
-            Login
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
+            className="bg-slate-100 p-2 rounded border-2 border-teal-500 transition-all duration-300 ring-0 focus:ring-2 focus:ring-teal-200 focus:outline-none"
+          />
+          <button className="self-center bg-teal-500 text-white px-4 py-2 hover:bg-teal-600 duration-300 rounded">
+            Register
           </button>
           <small className="self-center">
-            Don't have an account?{" "}
-            <Link className="text-blue-500" to="/register">
-              Register
+            Already have an account?{" "}
+            <Link className="text-blue-500" to="/login">
+              Login
             </Link>
           </small>
         </div>
@@ -54,4 +64,4 @@ const Login = (): JSX.Element => {
   );
 };
 
-export default Login;
+export default Register;
