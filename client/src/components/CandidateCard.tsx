@@ -23,8 +23,13 @@ const CandidateCard = (props: {
         </button>
       </div>
       <div className="flex flex-wrap gap-4 mt-4">
-        {props.tags.map((tag) => (
-          <p className="bg-slate-100 text-slate-700 px-4 py-2 rounded">{tag}</p>
+        {props.tags.map((tag, idx) => (
+          <p
+            className="bg-slate-100 text-slate-700 px-4 py-2 rounded"
+            key={`tag-${tag}-${idx}`}
+          >
+            {tag}
+          </p>
         ))}
       </div>
     </div>

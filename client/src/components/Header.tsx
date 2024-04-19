@@ -28,9 +28,6 @@ const Header = (): JSX.Element => {
           <NavLink to="/people" className="nav-link">
             People
           </NavLink>
-          <NavLink to="/career-advices" className="nav-link">
-            Career Advices
-          </NavLink>
         </nav>
       </div>
       <nav>
@@ -94,9 +91,6 @@ const Header = (): JSX.Element => {
         </NavLink>
         <NavLink to="/people" className="text-2xl text-slate-700">
           People
-        </NavLink>
-        <NavLink to="/career-advices" className="text-2xl text-slate-700">
-          Career Advices
         </NavLink>
         {isLoggedIn ? (
           <>

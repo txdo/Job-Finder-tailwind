@@ -9,6 +9,7 @@ import useApp from "./hooks/useApp";
 import Register from "./components/Register";
 import Candidates from "./components/Candidates";
 import WithHeaderAndFooter from "./components/WithHeaderAndFooter";
+import Profile from "./components/Profile";
 
 function App() {
   useApp();
@@ -25,6 +26,7 @@ function App() {
           <Route path="/all-jobs" element={<AllJobs />} />
           <Route path="/companies/:id" element={<CompanyInfo />} />
           <Route path="/people" element={<Candidates />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </div>
