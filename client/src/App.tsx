@@ -10,6 +10,8 @@ import Register from "./components/Register";
 import Candidates from "./components/Candidates";
 import WithHeaderAndFooter from "./components/WithHeaderAndFooter";
 import Profile from "./components/Profile";
+import RegisterCompany from "./components/RegisterCompany";
+import LoginCompany from "./components/LoginCompany";
 
 function App() {
   useApp();
@@ -20,6 +22,8 @@ function App() {
         <Route element={<WithHeader />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/register-company" element={<RegisterCompany />} />
+          <Route path="/login-company" element={<LoginCompany />} />
         </Route>
         <Route element={<WithHeaderAndFooter />}>
           <Route index element={<Home />} />

@@ -28,7 +28,7 @@ const useRegister = (): {
     });
 
     if (res.status === 201) {
-      setIsLoggedIn(true);
+      setIsLoggedIn("user");
       navigate("/");
     }
   };

@@ -1,7 +1,9 @@
+const Company = require("../models/Company");
 const User = require("../models/User");
-const { validateRegister } = require("../utils/validation");
+const { validateRegister, validateCompany } = require("../utils/validation");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 require("dotenv").config();
 
 exports.register = async (req, res) => {
@@ -45,6 +47,93 @@ exports.register = async (req, res) => {
   }
 };
 
+exports.registerCompany = async (req, res) => {
+  if (req.user)
+    return res.status(400).send({ errors: ["Company already logged in"] });
+
+  const {
+    name,
+    field,
+    location,
+    description,
+    reasons,
+    url,
+    username,
+    password,
+    confirmPassword,
+  } = req.body;
+
+  const banner = req.files.banner;
+  const image = req.files.image;
+
+  const errors = validateCompany(
+    name,
+    description,
+    reasons,
+    url,
+    username,
+    password,
+    confirmPassword,
+    banner,
+    image
+  );
+
+  if (errors.length > 0) {
+    fs.unlink(banner[0].path, (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+    });
+
+    fs.unlink(image[0].path, (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+    });
+    return res.status(400).send({ errors });
+  }
+
+  const company = await Company.findOne({ username });
+
+  if (company)
+    return res.status(409).send({ errors: ["Username already exists"] });
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  try {
+    const newCompany = await Company.create({
+      name,
+      field,
+      location,
+      description,
+      reasons,
+      url,
+      banner: banner[0].filename,
+      image: image[0].filename,
+      username,
+      password: hashedPassword,
+    });
+
+    const accessToken = jwt.sign(
+      {
+        _id: newCompany._id,
+        name: newCompany.name,
+        company: true,
+      },
+      process.env.JWT_KEY
+    );
+
+    res
+      .status(201)
+      .cookie("accessToken", accessToken)
+      .send({ message: "Company created successfully" });
+  } catch (err) {
+    res.status(400).send({ errors: [err.message] });
+  }
+};
+
 exports.login = async (req, res) => {
   if (req.user)
     return res.status(400).send({ errors: ["User already logged in"] });
@@ -74,9 +163,40 @@ exports.login = async (req, res) => {
     .send({ message: "User logged in successfully" });
 };
 
+exports.loginCompany = async (req, res) => {
+  if (req.user)
+    return res.status(400).send({ errors: ["Company already logged in"] });
+
+  const { username, password } = req.body;
+
+  const company = await Company.findOne({ username });
+
+  if (!company)
+    return res.status(400).send({ errors: ["Company does not exist"] });
+
+  const isPasswordCorrect = await bcrypt.compare(password, company.password);
+
+  if (!isPasswordCorrect)
+    return res.status(400).send({ errors: ["Incorrect password"] });
+
+  const accessToken = jwt.sign(
+    {
+      _id: company._id,
+      name: company.name,
+      company: true,
+    },
+    process.env.JWT_KEY
+  );
+
+  res.status(200).cookie("accessToken", accessToken).send({
+    message: "Company logged in successfully",
+  });
+};
+
 exports.isLoggedIn = (req, res) => {
   if (!req.user) return res.status(401).send({ isLoggedIn: false });
-  res.status(200).send({ isLoggedIn: true });
+  if (!req.user.company) return res.status(200).send({ isLoggedIn: "company" });
+  res.status(200).send({ isLoggedIn: "user" });
 };
 
 exports.logout = (req, res) => {

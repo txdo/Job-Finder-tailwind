@@ -53,9 +53,9 @@ const Register = (): JSX.Element => {
             Register
           </button>
           <small className="self-center">
-            Already have an account?{" "}
-            <Link className="text-blue-500" to="/login">
-              Login
+            Register a company{" "}
+            <Link className="text-blue-500" to="/register-company">
+              here
             </Link>
           </small>
         </div>

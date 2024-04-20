@@ -43,9 +43,9 @@ const Login = (): JSX.Element => {
             Login
           </button>
           <small className="self-center">
-            Don't have an account?{" "}
-            <Link className="text-blue-500" to="/register">
-              Register
+            You are a company? Login{" "}
+            <Link className="text-blue-500" to="/login-company">
+              here
             </Link>
           </small>
         </div>

@@ -18,7 +18,7 @@ const useLogin = (): {
     });
 
     if (res.status === 200) {
-      setIsLoggedIn(true);
+      setIsLoggedIn("user");
       navigate("/");
     }
   };

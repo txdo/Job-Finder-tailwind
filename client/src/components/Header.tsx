@@ -31,13 +31,25 @@ const Header = (): JSX.Element => {
         </nav>
       </div>
       <nav>
-        {isLoggedIn ? (
+        {isLoggedIn === "user" ? (
           <>
             <NavLink to="/messages" className="nav-link">
               Messages
             </NavLink>
             <NavLink to="/profile" className="nav-link">
               Profile
+            </NavLink>
+            <button onClick={logout} className="nav-link">
+              Logout
+            </button>
+          </>
+        ) : isLoggedIn === "company" ? (
+          <>
+            <NavLink to="/applicants" className="nav-link">
+              Applicants
+            </NavLink>
+            <NavLink to="/company-profile" className="nav-link">
+              Company Profile
             </NavLink>
             <button onClick={logout} className="nav-link">
               Logout
@@ -92,13 +104,25 @@ const Header = (): JSX.Element => {
         <NavLink to="/people" className="text-2xl text-slate-700">
           People
         </NavLink>
-        {isLoggedIn ? (
+        {isLoggedIn === "user" ? (
           <>
             <NavLink to="/messages" className="text-2xl text-slate-700">
               Messages
             </NavLink>
             <NavLink to="/profile" className="text-2xl text-slate-700">
               Profile
+            </NavLink>
+            <button onClick={logout} className="text-2xl text-slate-700">
+              Logout
+            </button>
+          </>
+        ) : isLoggedIn === "company" ? (
+          <>
+            <NavLink className="text-2xl text-slate-700" to="/applicants">
+              Applicants
+            </NavLink>
+            <NavLink className="text-2xl text-slate-700" to="/company-profile">
+              Company Profile
             </NavLink>
             <button onClick={logout} className="text-2xl text-slate-700">
               Logout
