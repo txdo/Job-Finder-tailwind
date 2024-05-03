@@ -12,6 +12,8 @@ import WithHeaderAndFooter from "./components/WithHeaderAndFooter";
 import Profile from "./components/Profile";
 import RegisterCompany from "./components/RegisterCompany";
 import LoginCompany from "./components/LoginCompany";
+import Companies from "./components/Companies";
+import CompanyProfile from "./components/CompanyProfile";
 
 function App() {
   useApp();
@@ -31,6 +33,8 @@ function App() {
           <Route path="/companies/:id" element={<CompanyInfo />} />
           <Route path="/people" element={<Candidates />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/companies" element={<Companies />} />
+          <Route path="/company-profile" element={<CompanyProfile />} />
         </Route>
       </Routes>
     </div>

@@ -1,17 +1,17 @@
 import { useState } from "react";
-import CandidateCard from "./CandidateCard";
-import businessman from "../assets/businessman.jpg";
+import jsLogo from "../assets/js.png";
+import CompanyCard from "./CompanyCard";
 
-const Candidates = (): JSX.Element => {
+const Companies = (): JSX.Element => {
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("Location");
-  const [experience, setExperience] = useState("Experience");
+  const [industry, setIndustry] = useState("Industry");
 
   return (
     <section>
       <div className="my-container">
         <h1 className="text-4xl text-slate-700 font-bold">
-          Search <span className="text-teal-500">Candidates</span>
+          Search <span className="text-teal-500">Companies</span>
         </h1>
         <div className="grid md:grid-cols-[1fr_2fr] grid-cols-1 gap-8 mt-12">
           <div className="space-y-2">
@@ -43,36 +43,36 @@ const Candidates = (): JSX.Element => {
               </select>
               <select
                 className="flex-grow p-3 bg-slate-100"
-                value={experience}
-                onChange={(e) => setExperience(e.target.value)}
+                value={industry}
+                onChange={(e) => setIndustry(e.target.value)}
               >
-                <option value="Experience">Experience</option>
-                <option value="Intern">Intern</option>
-                <option value="Entry-Level">Entry Level</option>
-                <option value="Mid-Level">Mid Level</option>
-                <option value="Senior-Level">Senior Level</option>
+                <option value="Industry">Industry</option>
+                <option value="Finance">Finance</option>
+                <option value="Education">Education</option>
+                <option value="IT">IT</option>
+                <option value="Marketing">Marketing</option>
               </select>
             </div>
           </div>
         </div>
         <div className="space-y-4 mt-8">
-          <CandidateCard
-            name="Josh"
+          <CompanyCard
+            name="Laborum"
             location="Bulgaria"
-            tags={["Frontend", "React", "JavaScript", "Tailwind CSS"]}
-            profilePicture={businessman}
+            about="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis ex aspernatur minus quisquam. Unde eius officiis laudantium. Perspiciatis, ducimus placeat."
+            image={jsLogo}
           />
-          <CandidateCard
-            name="Josh"
+          <CompanyCard
+            name="Laborum"
             location="Bulgaria"
-            tags={["Frontend", "React", "JavaScript", "Tailwind CSS"]}
-            profilePicture={businessman}
+            about="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis ex aspernatur minus quisquam. Unde eius officiis laudantium. Perspiciatis, ducimus placeat."
+            image={jsLogo}
           />
-          <CandidateCard
-            name="Josh"
+          <CompanyCard
+            name="Laborum"
             location="Bulgaria"
-            tags={["Frontend", "React", "JavaScript", "Tailwind CSS"]}
-            profilePicture={businessman}
+            about="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis ex aspernatur minus quisquam. Unde eius officiis laudantium. Perspiciatis, ducimus placeat."
+            image={jsLogo}
           />
         </div>
       </div>
@@ -80,4 +80,4 @@ const Candidates = (): JSX.Element => {
   );
 };
 
-export default Candidates;
+export default Companies;

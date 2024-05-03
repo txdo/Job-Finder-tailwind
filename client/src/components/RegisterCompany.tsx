@@ -19,8 +19,8 @@ const RegisterCompany = (): JSX.Element => {
   const { register } = useRegisterCompany();
 
   return (
-    <section className="h-full flex items-center justify-center">
-      <div className="h-[70vh] overflow-y-auto lg:w-[60%] w-[90%] border rounded shadow gap-4 flex flex-col items-center p-8 md:px-16">
+    <section className="h-full flex-col flex items-center justify-center">
+      <div className="h-1 flex-grow overflow-y-auto lg:w-[60%] w-[90%] border rounded shadow gap-4 flex flex-col items-center p-8 md:px-16">
         <h1 className="font-bold text-3xl text-slate-700">
           Register your company ✅
         </h1>
@@ -97,7 +97,7 @@ const RegisterCompany = (): JSX.Element => {
             />
             <button
               onClick={() => {
-                setReasons([...reasons, reason]);
+                setReasons((oldReasons) => [...oldReasons, reason]);
                 setReason("");
                 setAddingReason(false);
               }}

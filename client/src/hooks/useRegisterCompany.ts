@@ -37,7 +37,7 @@ const useRegisterCompany = (): {
     formData.append("field", field);
     formData.append("location", location);
     formData.append("description", description);
-    formData.append("reasons", JSON.stringify(reasons));
+    formData.append("reasons", reasons.toString());
     formData.append("url", url);
     formData.append("banner", banner as Blob);
     formData.append("image", image as Blob);
@@ -50,9 +50,6 @@ const useRegisterCompany = (): {
       credentials: "include",
       body: formData,
     });
-
-    const data = await res.json();
-    console.log(data);
 
     if (res.status === 201) {
       setIsLoggedIn("company");

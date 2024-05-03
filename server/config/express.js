@@ -9,7 +9,7 @@ exports.setupExpress = () => {
   app.use(cors({ origin: ["http://localhost:5173"], credentials: true }));
   app.use(express.json());
   app.use(cookieParser());
-  app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+  app.use(express.static("uploads"));
 
   app.listen(3000, () => {
     console.log("Server listening on port 3000");

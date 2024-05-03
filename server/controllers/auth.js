@@ -4,6 +4,7 @@ const { validateRegister, validateCompany } = require("../utils/validation");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
+const { stringToArray } = require("../utils/helper");
 require("dotenv").config();
 
 exports.register = async (req, res) => {
@@ -56,15 +57,18 @@ exports.registerCompany = async (req, res) => {
     field,
     location,
     description,
-    reasons,
     url,
     username,
     password,
     confirmPassword,
   } = req.body;
 
+  let { reasons } = req.body;
+
   const banner = req.files.banner;
   const image = req.files.image;
+
+  reasons = stringToArray(reasons);
 
   const errors = validateCompany(
     name,
@@ -195,8 +199,8 @@ exports.loginCompany = async (req, res) => {
 
 exports.isLoggedIn = (req, res) => {
   if (!req.user) return res.status(401).send({ isLoggedIn: false });
-  if (!req.user.company) return res.status(200).send({ isLoggedIn: "company" });
-  res.status(200).send({ isLoggedIn: "user" });
+  if (!req.user.company) return res.status(200).send({ isLoggedIn: "user" });
+  res.status(200).send({ isLoggedIn: "company" });
 };
 
 exports.logout = (req, res) => {

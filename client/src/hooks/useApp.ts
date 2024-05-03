@@ -10,7 +10,10 @@ const useApp = () => {
         credentials: "include",
       });
 
-      if (res.status === 200) setIsLoggedIn(true);
+      const data = await res.json();
+      console.log(data.isLoggedIn);
+      if (data.isLoggedIn === "company") setIsLoggedIn("company");
+      else setIsLoggedIn("user");
     };
 
     checkIsLoggedIn();
